@@ -37,7 +37,7 @@ class Colors:
 # CONFIGURATION
 # ============================================================================
 
-CLIENT_NAME = "🃏 Ace High Legends 🃏"  # Creative team name!
+CLIENT_NAME = "🌀 Rasengan Gamblers 🌀"  # Spiral into victory!
 UDP_TIMEOUT = 10.0  # Timeout for waiting for server offers
 TCP_TIMEOUT = 30.0  # TCP connection timeout
 

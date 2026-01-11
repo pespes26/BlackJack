@@ -31,7 +31,7 @@ class Colors:
 # CONFIGURATION
 # ============================================================================
 
-SERVER_NAME = "🎰 Royal Flush Dealers 🎰"  # Creative team name!
+SERVER_NAME = "🍃 Leaf Village Casino 🍃"  # Where ninjas bet it all!
 TCP_PORT = 0  # 0 means OS will assign a random available port
 OFFER_INTERVAL = 1.0  # Send offer every 1 second
 TCP_TIMEOUT = 60.0  # TCP connection timeout
