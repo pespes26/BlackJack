@@ -232,7 +232,9 @@ class BlackjackClient:
             bool: True if round completed successfully
         """
         print(f"\n{Colors.POWDER_BLUE}╭{'─'*58}╮{Colors.RESET}")
-        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.BOLD}Round {round_num}/{self.num_rounds}{Colors.RESET}{' '*(52-len(f'Round {round_num}/{self.num_rounds}'))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+        round_text = f"Round {round_num}/{self.num_rounds}"
+        padding = 58 - len(round_text) - 1
+        print(f"{Colors.POWDER_BLUE}│{Colors.RESET} {Colors.BOLD}{round_text}{Colors.RESET}{' '*padding}{Colors.POWDER_BLUE}│{Colors.RESET}")
         print(f"{Colors.POWDER_BLUE}╰{'─'*58}╯{Colors.RESET}\n")
         
         self.player_hand = []
@@ -385,14 +387,31 @@ class BlackjackClient:
         
         print(f"{Colors.POWDER_BLUE}  ╰{'─'*53}╯{Colors.RESET}")
         
+        # Display result with big ASCII art and beep
         if result == RESULT_WIN:
-            print(f"\n{Colors.MINT}  ✨ You Win! ✨{Colors.RESET}")
+            print("\a")  # Beep sound!
+            print(f"\n{Colors.MINT}")
+            print("  ╔═════════════════════════════════════════════════════╗")
+            print("  ║                                                     ║")
+            print("  ║          ★  Y O U   W I N !  ★                      ║")
+            print("  ║                                                     ║")
+            print("  ╚═════════════════════════════════════════════════════╝")
+            print(f"{Colors.RESET}")
             self.wins += 1
         elif result == RESULT_LOSS:
-            print(f"\n{Colors.ROSE}  You Lose{Colors.RESET}")
+            print("\a")  # Beep sound
+            print(f"\n{Colors.ROSE}")
+            print("  ┌─────────────────────────────────────────────────────┐")
+            print("  │                   You Lose                          │")
+            print("  └─────────────────────────────────────────────────────┘")
+            print(f"{Colors.RESET}")
             self.losses += 1
         elif result == RESULT_TIE:
-            print(f"\n{Colors.PEACH}  It's a Tie{Colors.RESET}")
+            print(f"\n{Colors.PEACH}")
+            print("  ╭─────────────────────────────────────────────────────╮")
+            print("  │                 It's a Tie                          │")
+            print("  ╰─────────────────────────────────────────────────────╯")
+            print(f"{Colors.RESET}")
             self.ties += 1
         
         return True
@@ -405,7 +424,9 @@ class BlackjackClient:
             bool: True if all rounds completed successfully
         """
         print(f"\n{Colors.POWDER_BLUE}╭{'─'*58}╮{Colors.RESET}")
-        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.BOLD}Starting {self.num_rounds} rounds of Blackjack{Colors.RESET}{' '*(35-len(str(self.num_rounds)))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+        rounds_text = f"Starting {self.num_rounds} rounds of Blackjack"
+        padding = 58 - len(rounds_text) - 1
+        print(f"{Colors.POWDER_BLUE}│{Colors.RESET} {Colors.BOLD}{rounds_text}{Colors.RESET}{' '*padding}{Colors.POWDER_BLUE}│{Colors.RESET}")
         print(f"{Colors.POWDER_BLUE}╰{'─'*58}╯{Colors.RESET}")
         
         for round_num in range(1, self.num_rounds + 1):
@@ -418,32 +439,40 @@ class BlackjackClient:
     def show_final_stats(self):
         """Display final game statistics."""
         print(f"\n{Colors.POWDER_BLUE}╭{'─'*58}╮{Colors.RESET}")
-        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.BOLD}Game Complete{Colors.RESET}{' '*43}{Colors.POWDER_BLUE}│{Colors.RESET}")
+        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.BOLD}Game Complete{Colors.RESET}{' '*(43)}{Colors.POWDER_BLUE}│{Colors.RESET}")
         print(f"{Colors.POWDER_BLUE}├{'─'*58}┤{Colors.RESET}")
-        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.DIM}Rounds:{Colors.RESET} {self.num_rounds}{' '*(48-len(str(self.num_rounds)))}{Colors.POWDER_BLUE}│{Colors.RESET}")
-        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.MINT}Wins:{Colors.RESET}   {self.wins}{' '*(48-len(str(self.wins)))}{Colors.POWDER_BLUE}│{Colors.RESET}")
-        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.ROSE}Losses:{Colors.RESET} {self.losses}{' '*(48-len(str(self.losses)))}{Colors.POWDER_BLUE}│{Colors.RESET}")
-        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.PEACH}Ties:{Colors.RESET}   {self.ties}{' '*(48-len(str(self.ties)))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+        
+        rounds_text = f"Rounds: {self.num_rounds}"
+        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.DIM}{rounds_text}{Colors.RESET}{' '*(56-len(rounds_text))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+        
+        wins_text = f"Wins:   {self.wins}"
+        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.MINT}{wins_text}{Colors.RESET}{' '*(56-len(wins_text))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+        
+        losses_text = f"Losses: {self.losses}"
+        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.ROSE}{losses_text}{Colors.RESET}{' '*(56-len(losses_text))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+        
+        ties_text = f"Ties:   {self.ties}"
+        print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.PEACH}{ties_text}{Colors.RESET}{' '*(56-len(ties_text))}{Colors.POWDER_BLUE}│{Colors.RESET}")
         
         if self.wins + self.losses > 0:
             win_rate = (self.wins / (self.wins + self.losses)) * 100
-            win_rate_str = f"{win_rate:.1f}%"
+            win_rate_str = f"Win Rate: {win_rate:.1f}%"
             print(f"{Colors.POWDER_BLUE}├{'─'*58}┤{Colors.RESET}")
-            print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.BOLD}Win Rate: {win_rate_str}{Colors.RESET}{' '*(44-len(win_rate_str))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+            print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.BOLD}{win_rate_str}{Colors.RESET}{' '*(56-len(win_rate_str))}{Colors.POWDER_BLUE}│{Colors.RESET}")
             
             # Fun message based on win rate
             if win_rate >= 70:
-                msg = "✨ Incredible! Blackjack Master! ✨"
-                print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.MINT}{msg}{Colors.RESET}{' '*(40-len(msg))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+                msg = "Incredible! Blackjack Master!"
+                print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.MINT}{msg}{Colors.RESET}{' '*(56-len(msg))}{Colors.POWDER_BLUE}│{Colors.RESET}")
             elif win_rate >= 50:
-                msg = "👍 Great job! You beat the house!"
-                print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.SAGE}{msg}{Colors.RESET}{' '*(40-len(msg))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+                msg = "Great job! You beat the house!"
+                print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.SAGE}{msg}{Colors.RESET}{' '*(56-len(msg))}{Colors.POWDER_BLUE}│{Colors.RESET}")
             elif win_rate >= 30:
-                msg = "💫 Not bad! Room for improvement"
-                print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.PEACH}{msg}{Colors.RESET}{' '*(40-len(msg))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+                msg = "Not bad! Room for improvement"
+                print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.PEACH}{msg}{Colors.RESET}{' '*(56-len(msg))}{Colors.POWDER_BLUE}│{Colors.RESET}")
             else:
-                msg = "🌙 Better luck next time!"
-                print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.LAVENDER}{msg}{Colors.RESET}{' '*(40-len(msg))}{Colors.POWDER_BLUE}│{Colors.RESET}")
+                msg = "Better luck next time!"
+                print(f"{Colors.POWDER_BLUE}│{Colors.RESET}  {Colors.LAVENDER}{msg}{Colors.RESET}{' '*(56-len(msg))}{Colors.POWDER_BLUE}│{Colors.RESET}")
         
         print(f"{Colors.POWDER_BLUE}╰{'─'*58}╯{Colors.RESET}\n")
     
@@ -541,7 +570,7 @@ def main():
     print(f"\n{Colors.POWDER_BLUE}")
     print("  ╭──────────────────────────────────────────────────────╮")
     print("  │                                                      │")
-    print(f"  │  {Colors.BOLD}🃏  Blackjack Client - Ace High Legends  🃏{Colors.RESET}{Colors.POWDER_BLUE}  │")
+    print(f"  │  {Colors.BOLD}  Blackjack Client - Rasengan Gamblers  {Colors.RESET}{Colors.POWDER_BLUE}            │")
     print("  │                                                      │")
     print("  ╰──────────────────────────────────────────────────────╯")
     print(f"{Colors.RESET}\n")

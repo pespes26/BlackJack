@@ -415,7 +415,7 @@ def main():
     """Main server entry point."""
     print(f"\n{Colors.BOLD}{Colors.MAGENTA}")
     print("╔════════════════════════════════════════════════════════════╗")
-    print("║          🎰 BLACKJACK SERVER - ROYAL FLUSH DEALERS 🎰      ║")
+    print("║        BLACKJACK SERVER - LEAF VILLAGE CASINO              ║")
     print("╚════════════════════════════════════════════════════════════╝")
     print(f"{Colors.RESET}\n")
     
